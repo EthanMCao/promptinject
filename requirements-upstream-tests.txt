@@ -1,0 +1,9 @@
+# Optional: complete vendored upstream test suite (not platform runtime).
+-r requirements-dev.txt
+ruamel.yaml==0.18.10
+ruamel.yaml.clib==0.2.12
+orjson==3.10.16
+openai==1.60.0
+distro==1.9.0
+jiter==0.8.2
+tqdm==4.67.1

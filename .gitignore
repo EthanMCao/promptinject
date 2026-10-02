@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+htmlcov/
+data/
+dist/
+artifacts/
+.env*
+benchmarks/latest.*
+.hypothesis/
+build/
+*.egg-info/
+node_modules/
+.ruff_cache/
+benchmarks/custom-latest.*
