@@ -1,0 +1,50 @@
+name: Security evaluation
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ['3.12', '3.14']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - run: pip install -r requirements-dev.txt
+      - run: python scripts/package_source.py
+      - run: python -m pytest --cov=promptinject --cov-branch --cov-report=term-missing --cov-fail-under=85
+      - name: Upstream core compatibility
+        env:
+          PYTHONPATH: vendor/upstream/src
+        run: python -m pytest -q vendor/upstream/tests/layers vendor/upstream/tests/normalize vendor/upstream/tests/test_context.py vendor/upstream/tests/test_firewall.py vendor/upstream/tests/test_policy.py vendor/upstream/tests/test_end_to_end.py
+      - run: python -m promptinject benchmark
+      - run: python -m promptinject compare benchmarks/baseline.json benchmarks/latest.json
+      - run: make firewall-check PYTHON=python
+      - uses: actions/upload-artifact@v4
+        with:
+          name: replay-results-${{ matrix.python }}
+          path: benchmarks/latest.*
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm test
+  container:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose config --quiet
+      - run: docker compose up --build -d --wait
+      - run: curl --fail http://127.0.0.1:8000/api/health
+      - run: curl --fail http://127.0.0.1:8000/source -o source.tar.gz
+      - run: docker compose down -v
+        if: always()

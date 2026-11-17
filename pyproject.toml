@@ -1,0 +1,5 @@
+# Source-checkout application. Install dependencies with requirements-dev.txt.
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "vendor/upstream/src"]
+addopts = "-ra --basetemp=artifacts/pytest"

@@ -1,0 +1,17 @@
+-r requirements.txt
+pytest==9.0.2
+pytest-cov==7.1.0
+coverage==7.13.5
+httpx==0.28.1
+httpcore==1.0.9
+certifi==2026.2.25
+iniconfig==2.3.0
+packaging==25.0
+pluggy==1.6.0
+Pygments==2.19.2
+hypothesis==6.130.0
+sortedcontainers==2.4.0
+attrs==25.4.0
+httpx2==2.10.0
+httpcore2==2.10.0
+truststore==0.10.5

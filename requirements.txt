@@ -1,0 +1,16 @@
+# Exact runtime versions verified against OSV and exercised locally. Upstream core requires pydantic only.
+fastapi==0.163.1
+uvicorn==0.30.0
+pydantic==2.12.5
+pydantic_core==2.41.5
+starlette==1.10.0
+annotated-types==0.7.0
+typing_extensions==4.16.0
+typing-inspection==0.4.2
+anyio==4.16.0
+idna==3.20
+sniffio==1.3.1
+click==8.3.1
+h11==0.16.0
+annotated-doc==0.0.6
+opentelemetry-api==1.45.2

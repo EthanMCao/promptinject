@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>API reference · PromptInject Lab</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script defer src="/static/docs.js"></script>
+  </head>
+  <body>
+    <main class="docs-main">
+      <header>
+        <a href="/">← PromptInject Lab</a
+        ><a href="/openapi.json">Download OpenAPI JSON ↓</a>
+      </header>
+      <section class="title-row">
+        <div>
+          <div class="eyebrow">LOCAL API REFERENCE</div>
+          <h1>Inspect. Replay. Compare.</h1>
+          <p>
+            Generated from this application's OpenAPI schema. No external assets
+            required.
+          </p>
+        </div>
+      </section>
+      <p id="docs-status" role="status">Loading API schema…</p>
+      <section id="endpoints"></section>
+      <section class="panel">
+        <h2>Start an evaluation</h2>
+        <pre>
+curl -X POST http://127.0.0.1:8000/api/runs \
+  -H 'Content-Type: application/json' \
+  -d '{"seed":42,"repeats":3,"variants":["original"],"split":"all"}'</pre
+        >
+        <p>
+          Runs return a complete report. One evaluation can run at a time;
+          concurrent requests receive 409. Invalid configuration receives 422.
+        </p>
+      </section>
+      <section class="panel">
+        <h2>Request schemas</h2>
+        <pre id="schemas"></pre>
+      </section>
+    </main>
+  </body>
+</html>
